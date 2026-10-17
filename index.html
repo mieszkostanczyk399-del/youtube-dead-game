@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Dead - Gra</title>
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; }
+        #game-container { max-width: 600px; margin: auto; background: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(255,0,0,0.3); }
+        h1 { color: #ff0000; }
+        .stats { display: flex; justify-content: space-around; margin-bottom: 20px; font-weight: bold; background: #2d2d2d; padding: 10px; border-radius: 5px; }
+        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; }
+        .btn:hover { background: #cc0000; }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <h1>YouTube Dead 📺💀</h1>
+    <div class="stats">
+        <div>Życie: <span id="hp">100</span>%</div>
+        <div>Widzowie: <span id="subs">0</span></div>
+    </div>
+    <p id="story-text">Algorytm oszalał. Transmisje na żywo zamieniają ludzi w cyfrowe zombie. Jesteś w głównej serwerowni. Co robisz?</p>
+    <div id="choices">
+        <button class="btn" onclick="wybor(1)">Odłącz zasilanie serwerów</button>
+        <button class="btn" onclick="wybor(2)">Uruchom transmisję ratunkową</button>
+    </div>
+</div>
+
+<script>
+    let hp = 100;
+    let subs = 0;
+
+    function aktualizujInterfejs() {
+        document.getElementById('hp').innerText = hp;
+        document.getElementById('subs').innerText = subs;
+    }
+
+    function wybor(opcja) {
+        let tekst = document.getElementById('story-text');
+        let kontenerOpcji = document.getElementById('choices');
+
+        if (opcja === 1) {
+            hp -= 20;
+            subs += 500;
+            tekst.innerText = "Odłączyłeś kable! Wybuchające spięcie Cię raniło (-20% HP), ale zyskałeś szacunek ocalałych hackerów online (+500 widzów). Przetrwałeś pierwszą falę.";
+            kontenerOpcji.innerHTML = '<button class="btn" onclick="location.reload()">Zagraj ponownie</button>';
+        } else if (opcja === 2) {
+            hp = 0;
+            tekst.innerText = "Światło kamery przyciągnęło zainfekowanych influencerów do serwerowni. Zostałeś zbanowany na śmierć... Koniec gry.";
+            kontenerOpcji.innerHTML = '<button class="btn" onclick="location.reload()">Spróbuj ponownie</button>';
+        }
+        aktualizujInterfejs();
+    }
+</script>
+
+</body>
+</html>
